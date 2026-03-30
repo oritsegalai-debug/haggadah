@@ -1413,23 +1413,33 @@ body {
 <script>
 
 // ============ AFIKOMAN GAME ============
-const afikoPositions = [
-  { top: '15%', right: '8%' },
-  { bottom: '20%', left: '5%' },
-  { top: '40%', right: '3%' },
-  { bottom: '10%', right: '50%' },
-  { top: '60%', left: '8%' },
-  { top: '25%', left: '45%' },
-  { bottom: '35%', right: '10%' },
-  { top: '75%', left: '3%' },
-  { top: '10%', left: '15%' },
-  { bottom: '5%', right: '15%' },
-  { top: '50%', right: '6%' },
-  { bottom: '25%', left: '40%' },
-  { top: '30%', left: '5%' },
-  { bottom: '15%', right: '30%' },
-  { top: '70%', right: '12%' },
-];
+// Generate unique random position for each section
+function randomAfikoPosition(index) {
+  // Alternate between corners/edges so each section feels different
+  const spots = [
+    { top: '12%', right: '6%' },
+    { bottom: '18%', left: '4%' },
+    { top: '45%', right: '4%' },
+    { bottom: '8%', right: '45%' },
+    { top: '65%', left: '6%' },
+    { top: '20%', left: '50%' },
+    { bottom: '30%', right: '8%' },
+    { top: '80%', left: '4%' },
+    { top: '8%', left: '12%' },
+    { bottom: '6%', right: '12%' },
+    { top: '55%', right: '5%' },
+    { bottom: '22%', left: '35%' },
+    { top: '35%', left: '4%' },
+    { bottom: '12%', right: '25%' },
+    { top: '72%', right: '10%' },
+    { top: '18%', right: '40%' },
+    { bottom: '40%', left: '6%' },
+    { top: '50%', left: '45%' },
+    { bottom: '15%', left: '10%' },
+    { top: '28%', right: '7%' },
+  ];
+  return spots[index % spots.length];
+}
 
 let afikoFound = 0;
 let afikoTotalCount = 0;
@@ -1473,7 +1483,7 @@ function placeAfikoman() {
   const sections = document.querySelectorAll('.section');
   afikoTotalCount = 0;
   sections.forEach((sec, i) => {
-    const pos = afikoPositions[i % afikoPositions.length];
+    const pos = randomAfikoPosition(i);
     const afiko = document.createElement('span');
     afiko.className = 'afikoman-hidden';
     afiko.textContent = '🫓';
